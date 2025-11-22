@@ -133,8 +133,11 @@
       color:var(--text-light);
     }
     .empty{
-      color:var(--text-muted);
-      margin-top:20px;
+      margin-top:40px;
+      text-align:center;
+      font-size:20px;
+      font-weight:700;
+      color:#b02020;
     }
 
     /* --------- responsive--------- */
@@ -168,7 +171,7 @@
       <section class="wrap">
         <h1>LEADERBOARD</h1>
         <div id="list" class="list"></div>
-        <div id="empty" class="empty" style="display:none;">Chưa có người chơi nào.</div>
+        <div id="empty" class="empty" style="display:none;">Comrade, carve your name into history!</div>
       </section>
       <!-- Cột phải: bỏ trống -->
     </div>
@@ -188,9 +191,6 @@
     })();
     // test deploy 
     const API_URL = "/api/leaderboard";
-    //const API_URL = "http://localhost:3000/api/leaderboard";
-    // Khi deploy Render:
-    // const API_URL = "https://citybuilder-leaderboard-api.onrender.com/api/leaderboard";
 
     function formatElapsed(seconds){
       seconds = Math.floor(seconds);
