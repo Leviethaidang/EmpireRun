@@ -38,7 +38,7 @@
     /* --------- layout 3 cột --------- */
     main.page{
       max-width:1200px;
-      margin:40px auto 60px;
+      margin:70px auto 60px;
       padding:0 16px;
     }
 
@@ -177,19 +177,28 @@
     </div>
   </main>
 
+  <!-- JS dùng chung -->
+  <script src="/js/headerLoader.js" defer></script>
 
   <script>
-    // Load header
-    (async function(){
-      try{
-        const res = await fetch("/header.html");
-        const html = await res.text();
-        document.getElementById("site-header").innerHTML = html;
-      }catch(e){
-        console.error("Không load được header:", e);
-      }
-    })();
-    // test deploy 
+    // ====== Đa ngôn ngữ======
+    const emptyTranslations = {
+      en: "Comrade, carve your name into history!",
+      vi: "Đồng chí, hãy khắc ghi tên mình vào lịch sử!"
+    };
+
+    function updateEmptyMessage(lang) {
+      const empty = document.getElementById("empty");
+      if (!empty) return;
+      empty.textContent = emptyTranslations[lang] || emptyTranslations.en;
+    }
+
+    // Nghe event do app.js bắn khi đổi ngôn ngữ
+    window.addEventListener("languageChange", function (e) {
+      const lang = (e.detail && e.detail.lang) || "en";
+      updateEmptyMessage(lang);
+    });
+
     const API_URL = "/api/leaderboard";
 
     function formatElapsed(seconds){
@@ -211,6 +220,9 @@
 
         list.innerHTML = "";
         if(!data || data.length === 0){
+          // Lấy lang hiện tại (hàm này do app.js gắn vào window)
+          const lang = window.getCurrentLang ? window.getCurrentLang() : "en";
+          updateEmptyMessage(lang);
           empty.style.display = "block";
           return;
         }
@@ -245,7 +257,13 @@
       }
     }
 
-    loadLeaderboard();
+    // Khi DOM xong: cập nhật text empty theo lang hiện tại + load data
+    document.addEventListener("DOMContentLoaded", () => {
+      const lang = window.getCurrentLang ? window.getCurrentLang() : "en";
+      updateEmptyMessage(lang);
+      loadLeaderboard();
+    });
   </script>
 </body>
 </html>
+

@@ -1,47 +1,297 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <meta charset="UTF-8" />
-    <title>Home</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <style>
-      body{
-        margin:0;
-        font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
-        background:#0b1f3a;
-        color:#eaf2ff;
+  <meta charset="UTF-8" />
+  <title>Empire Run – Home</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <style>
+    /* ====== NỀN ====== */
+    * {
+      box-sizing: border-box;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+    /*ẩn scrollbar nhưng vẫn scroll được*/
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+    }
+    html {
+      overflow-y: scroll;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+    html::-webkit-scrollbar {
+      width: 0;
+      height: 0;
+    }
+    /*phần thân*/
+    body {
+      margin: 0;
+      /* màu nền fallback + ảnh nền */
+      background-color: #d9b15b;
+      background-image: url("/img/HomeBG.png");
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      color: #3a2410;
+    }
+
+    /* ====== KHUNG CHÍNH ====== */
+    main.page {
+      max-width: 1200px;
+      margin: 70px auto 40px;
+      padding: 0 16px;
+    }
+
+    .layout-grid {
+      display: grid;
+      grid-template-columns: 0.3fr 1.4fr 0.3fr; /* 3 cột, cột giữa to nhất */
+      gap: 24px;
+      align-items: flex-start;
+    }
+
+    /* Cột giữa */
+    .home-center {
+      grid-column: 2;
+      width: 100%;
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 0px 16px 15px;
+    }
+
+    /* Logo ở giữa */
+    .home-logo {
+      display: block;
+      max-width: 640px;   /* chỉnh to/nhỏ logo */
+      width: 100%;
+      height: auto;
+      margin: 0px auto 20px;
+      filter: drop-shadow(0 6px 12px rgba(0,0,0,0.4));
+    }
+    .home-tagline {
+      margin: 0 0 32px;
+      text-align: center;
+      font-size: 32px;
+      font-weight: 900;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #8b1a10;
+      text-shadow:
+        0 2px 0 #f9e3b5,
+        0 4px 6px rgba(0,0,0,0.35);
+    }
+    html[data-lang="vi"] .home-tagline {
+      font-size: 30px;
+      letter-spacing: 0.10em;
+    }
+    /* Khối chứa 2 nút */
+    .home-actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 18px;
+      margin-bottom: 40px;
+    }
+
+    .home-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 220px;
+      padding: 14px 28px;
+      border-radius: 10px;
+      border: 3px solid #3a0505;
+      background: #b22222;
+      color: #fbe9c6;
+      font-size: 18px;
+      font-weight: 900;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      box-shadow:
+        0 4px 0 #3a0505,
+        0 6px 10px rgba(0, 0, 0, 0.45);
+      cursor: pointer;
+      transition:
+        transform 0.1s ease-out,
+        box-shadow 0.1s ease-out,
+        background 0.15s ease-out,
+        filter 0.15s ease-out;
+    }
+
+    .home-btn:hover {
+      transform: translateY(2px);
+      box-shadow:
+        0 2px 0 #3a0505,
+        0 4px 8px rgba(0, 0, 0, 0.4);
+      background: #cc2a2a;
+      filter: brightness(1.05);
+    }
+
+    .home-btn:active {
+      transform: translateY(3px);
+      box-shadow:
+        0 1px 0 #3a0505,
+        0 3px 6px rgba(0, 0, 0, 0.45);
+    }
+
+    /* Khối mô tả chung */
+    .home-description {
+      align-self: stretch;
+      width: 100%;
+      margin-top: 24px;
+    }
+
+    .home-description p {
+      margin: 10px 0;
+      font-size: 19px;
+      line-height: 1.7;
+      color: #2b1306;
+      font-weight: 600;
+      text-align: justify; 
+    }
+
+    /* Dòng mở đầu */
+    .home-description .desc-lead {
+      font-size: 24px;
+      font-weight: 800;
+      text-align: center;
+      margin-bottom: 22px;
+      color: #5b1508;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .home-description .desc-ending {
+      font-size: 23px;
+      font-weight: 800;
+      text-align: center;
+      margin-top: 60px;
+      color: #b22222;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      text-shadow:
+        0 2px 0 #f9e3b5,
+        0 4px 6px rgba(0,0,0,0.35);
+    }
+    /* Responsive: màn nhỏ thì bỏ 3 cột, xếp 1 cột */
+    @media (max-width: 768px) {
+      main.page {
+        margin-top: 24px;
       }
-      .home-wrap{
-        max-width:780px;
-        margin:20px auto;
-        padding:0 10px 40px;
+      .layout-grid {
+        grid-template-columns: 1fr;
       }
-    </style>
+      .home-center {
+        grid-column: 1;
+        padding-top: 24px;
+      }
+      .home-logo {
+        max-width: 260px;
+        margin: 20px auto 40px;
+      }
+    }
+  </style>
 </head>
 <body>
-    <!-- Load header-->
-    <div id="site-header"></div>
+  <!-- HEADER DÙNG CHUNG -->
+  <div id="site-header"></div>
 
-    <div class="home-wrap">
-      Đây là trang Home
-      <!-- sẽ build UI sau-->
+  <main class="page">
+    <div class="layout-grid">
+      <!-- Cột trái để trống -->
+      <div></div>
+
+      <!-- Cột giữa: logo -->
+      <section class="home-center">
+        <img src="/img/GameLogo.png" alt="Empire Run Logo" class="home-logo">
+
+        <!-- Khẩu hiệu -->
+        <h1 class="home-tagline" id="home-tagline"></h1>
+
+        <!-- Hai nút  -->
+        <div class="home-actions">
+          <!-- PLAY GAME: chưa xử lý gì, để # -->
+          <a href="#" class="home-btn">PLAY NOW</a>
+
+          <!-- LEADERBOARD: trỏ sang trang leaderboard -->
+          <a href="/leaderboard.html" class="home-btn">LEADERBOARD</a>
+        </div>
+        <!-- Mô tả game-->
+        <div class="home-description">
+          <p class="desc-lead" id="home-desc-lead"></p>
+
+          <p id="home-desc-p1"></p>
+
+          <p id="home-desc-p2"></p>
+
+          <p id="home-desc-p3"></p>
+
+          <p class="desc-ending" id="home-desc-ending"></p>
+        </div>
+      </section>
+
+      <!-- Cột phải để trống -->
+      <div></div>
     </div>
+  </main>
 
+  <!-- script load header dùng chung -->
+  <script src="/js/headerLoader.js" defer></script>
 
+  <script>
+    const homeTexts = {
+      en: {
+        tagline: "BUILD - EXPAND - RISE",
+        lead: "Empire Run is a city-builder forged in the spirit of industrial heroism.",
+        p1: "You are entrusted with commanding a young nation and transforming scattered lands into a disciplined, productive empire. Build factories, expand resource chains, feed and house the people, and unite distant regions under one coordinated economic plan. Every worker, every machine, every grain of wheat contributes to the strength of the collective.",
+        p2: "Manage logistics with precision, keep the wheels of industry turning, and prove that progress is achieved through order, efficiency, and unwavering determination. As your empire grows, challenges intensify—only leaders with sharp vision and iron resolve can maintain balance between production, consumption, and expansion.",
+        p3: "But Empire Run is not just construction — it is a race of greatness. Those who optimize fastest, produce strongest, and lead most decisively will earn their place on the eternal leaderboard of history.",
+        ending: "Comrade, the Empire awaits your command!"
+      },
+      vi: {
+        tagline: "KIẾN THIẾT - MỞ RỘNG - VƯƠN LÊN",
+        lead: "Empire Run là một trò chơi xây dựng mang tinh thần của chủ nghĩa anh hùng lao động.",
+        p1: "Bạn được giao trọng trách lãnh đạo một quốc gia non trẻ, biến những vùng đất rời rạc thành một đế chế kỷ luật và hùng mạnh. Hãy xây dựng nhà máy, mở rộng chuỗi sản xuất, cung cấp chỗ ở, phục vụ nhân dân và thống nhất cả những vùng xa xôi nhất thành một bộ máy kinh tế vận hành nhịp nhàng. Mỗi người dân – mỗi cỗ máy – mỗi hạt lúa mì đều là biểu trưng cho sức mạnh tập thể",
+        p2: "Hãy điều phối hậu cần thật chính xác, giữ cho bánh xe công nghiệp luôn quay và chứng minh rằng tiến bộ chỉ đạt được bằng trật tự, hiệu suất và ý chí sắt đá. Khi đế chế của bạn lớn mạnh, thử thách cũng sẽ dồn dập hơn – chỉ những nhà lãnh đạo có tầm nhìn sắc bén và bản lĩnh thép mới giữ được cân bằng giữa sản xuất, tiêu thụ và phát triển.",
+        p3: "Empire Run không chỉ là xây dựng – đó là cuộc chạy đua vươn tới vinh quang. Những người sản xuất mạnh nhất, tối ưu hiệu quả nhất và chỉ huy quyết đoán nhất sẽ có cơ hội khắc tên mình vào lịch sử.",
+        ending: "Đồng chí, Tổ Quốc đang chờ bạn!"
+      }
+    };
 
+    function applyHomeTranslations(lang) {
+      const t = homeTexts[lang] || homeTexts.en;
 
-    
-    <!--script load header.html -->
-    <script>
-      (async function(){
-        try{
-          const res = await fetch("/header.html");
-          const html = await res.text();
-          document.getElementById("site-header").innerHTML = html;
-        }catch(e){
-          console.error("Không load được header:", e);
-        }
-      })();
-    </script>
+      const taglineEl = document.getElementById("home-tagline");
+      const leadEl   = document.getElementById("home-desc-lead");
+      const p1El     = document.getElementById("home-desc-p1");
+      const p2El     = document.getElementById("home-desc-p2");
+      const p3El     = document.getElementById("home-desc-p3");
+      const endingEl = document.getElementById("home-desc-ending");
+
+      if (taglineEl) taglineEl.textContent = t.tagline;
+      if (leadEl)   leadEl.textContent   = t.lead;
+      if (p1El)     p1El.textContent     = t.p1;
+      if (p2El)     p2El.textContent     = t.p2;
+      if (p3El)     p3El.textContent     = t.p3;
+      if (endingEl) endingEl.textContent = t.ending;
+    }
+
+    // Khi trang load xong: áp dụng ngôn ngữ hiện tại
+    document.addEventListener("DOMContentLoaded", () => {
+      const lang = window.getCurrentLang ? window.getCurrentLang() : "en";
+      applyHomeTranslations(lang);
+    });
+
+    // Nghe event đổi ngôn ngữ từ header
+    window.addEventListener("languageChange", (e) => {
+      const lang = (e.detail && e.detail.lang) || "en";
+      applyHomeTranslations(lang);
+    });
+  </script>
 </body>
 </html>

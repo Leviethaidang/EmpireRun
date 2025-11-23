@@ -1,31 +1,63 @@
 <style>
   .topbar {
+    box-sizing: border-box; 
     background: #b22222; /* đỏ đậm */
     color: #fff;
-    padding: 10px 16px;
+    height: 64px;
+    padding: 16px 16px;
     box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
   }
+
   .topbar-inner {
     max-width: 900px;
     margin: 0 auto;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-end;
     gap: 16px;
   }
-  .topbar-title {
-    font-weight: 800;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    font-size: 14px;
+
+  /* Ô vuông chứa logo ở góc trái */
+  .topbar-logo {
+    position: absolute;
+    left: 350px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 64px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
   }
+
+  .topbar-logo a {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  .topbar-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* fit hết logo trong ô vuông */
+    display: block;
+  }
+
   .topbar-nav {
     display: flex;
     gap: 10px;
   }
+
   .topbar-link {
     border: 1px solid rgba(255,255,255,0.7);
-    border-radius: 999px;
+    border-radius: 10px;
     padding: 6px 14px;
     font-size: 13px;
     text-decoration: none;
@@ -33,41 +65,70 @@
     font-weight: 600;
     background: rgba(0,0,0,0.12);
   }
+
   .topbar-link:hover {
     background: rgba(0,0,0,0.25);
   }
-  .topbar-link.active {
-    background: #fff;
-    color: #b22222;
-    border-color: #fff;
+
+  /* ========== DROPDOWN NGÔN NGỮ ========== */
+  .topbar-lang {
+    display: flex;
+    align-items: center;
+    position: relative;
+  }
+  .topbar-lang select {
+    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,0.8);
+    background: rgba(0,0,0,0.18);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 6px 26px 6px 10px;
+    outline: none;
+    cursor: pointer;
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    position: relative;
+  }
+
+  .topbar-lang::after {
+    content: "▼";
+    border-radius: 20px;
+    font-size: 9px;
+    position: absolute;
+    right: 10px;
+    pointer-events: none;
+    color: rgba(255,255,255,0.9);
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  #lang-select option {
+    background: #b22222;
+    color: #ffffff;
   }
 </style>
 
 <div class="topbar">
+  <!-- LOGO góc trái -->
+  <div class="topbar-logo">
+    <a href="/">
+      <img src="/img/HomeLogo.png" alt="EmpireRun Logo">
+    </a>
+  </div>
+
+  <!-- PHẦN NỘI DUNG CHÍNH (MENU + LANGUAGE) -->
   <div class="topbar-inner">
-    <div class="topbar-title">
-      CITY BUILDER LEADERBOARD
-    </div>
     <nav class="topbar-nav">
-      <a href="/" class="topbar-link" data-page="home">Home</a>
       <a href="/leaderboard" class="topbar-link" data-page="leaderboard">Leaderboard</a>
     </nav>
+
+    <!-- Dropdown chọn ngôn ngữ -->
+    <div class="topbar-lang">
+      <select id="lang-select">
+        <option value="en">EN</option>
+        <option value="vi">VI</option>
+      </select>
+    </div>
   </div>
 </div>
-
-<script>
-  // Đánh dấu nút đang active theo URL hiện tại
-  (function() {
-    const path = window.location.pathname;
-    const links = document.querySelectorAll(".topbar-link");
-    links.forEach(link => {
-      const page = link.getAttribute("data-page");
-      if (page === "home" && (path === "/" || path === "/home")) {
-        link.classList.add("active");
-      }
-      if (page === "leaderboard" && path.startsWith("/leaderboard")) {
-        link.classList.add("active");
-      }
-    });
-  })();
-</script>
