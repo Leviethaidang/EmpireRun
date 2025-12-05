@@ -73,6 +73,11 @@ app.get("/", (req, res) => {
 app.get("/leaderboard", (req, res) => {
     res.sendFile(path.join(__dirname, "public", "leaderboard.html"));
 });
+//nut tai game
+app.get("/download", (req, res) => {
+    const downloadUrl = "https://drive.google.com/uc?export=download&id=1kFn-D542lzSdlmbp5I7SSMrkrTSrJaZC";
+    res.redirect(downloadUrl);
+});
 
 app.listen(PORT, () => {
     console.log(`Leaderboard server running at http://localhost:${PORT}`);
