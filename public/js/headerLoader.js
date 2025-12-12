@@ -47,8 +47,22 @@
         if (page === "leaderboard" && path.startsWith("/leaderboard")) {
           link.classList.add("active");
         }
+        if (page === "guide" && path.startsWith("/guide")) {
+          link.classList.add("active");
+        }
         // sau này thêm page khác thì if thêm vào đây
       });
+      // 2.5) Điều khiển nút Back/Guide theo trang 
+      const backBtn  = document.querySelector("#site-header #back-to-guide");
+      const guideBtn = document.querySelector("#site-header #nav-guide");
+      let p = window.location.pathname || "/";
+      if (p.length > 1) p = p.replace(/\/+$/, "");
+      // bài viết: /guide/<slug>
+      const isGuideArticle = p.startsWith("/guide/");
+      // trang list guide: /guide
+      const isGuideList = (p === "/guide");
+      if (backBtn)  backBtn.style.display  = isGuideArticle ? "inline-flex" : "none";
+      if (guideBtn) guideBtn.style.display = isGuideArticle ? "none" : "inline-flex";
 
     // 3) Khởi tạo ngôn ngữ + dropdown
     const select = document.querySelector("#site-header #lang-select");

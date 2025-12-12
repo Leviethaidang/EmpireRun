@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <title>Guide - Labor</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="icon" type="image/png" href="/img/WebLogo.png" />
+  <link rel="stylesheet" href="/css/global.css">
+  <style>
+    :root{
+      --card: rgba(120, 35, 20, 0.65);
+      --text-light: #fff3d6;
+      --text-muted: #f7e4b8;
+    }
+    *{ box-sizing:border-box; font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif; }
+    body{
+      margin:0;
+      background:url("/img/BlankBG.png") center/cover no-repeat fixed;
+      color:var(--text-light);
+    }
+    main.page{
+      max-width:900px;
+      margin:90px auto 60px;
+      padding:0 16px;
+    }
+    .article{
+      background:var(--card);
+      border-radius:14px;
+      padding:18px;
+      backdrop-filter:blur(3px);
+    }
+    h1{
+      margin:0 0 12px;
+      font-size:32px;
+      font-weight:900;
+      letter-spacing:0.18em;
+      text-transform:uppercase;
+      text-align:center;
+
+      color:#fff3d6;
+      text-shadow:
+        0 2px 0 rgba(0,0,0,0.55),
+        0 6px 12px rgba(0,0,0,0.35);
+    }
+    p{
+      color:var(--text-muted);
+      line-height:1.6;
+    }
+  </style>
+</head>
+<body>
+  <div id="site-header"></div>
+
+  <main class="page">
+  <article class="article">
+    <h1 id="t-title">LABOR BASIC</h1>
+
+    <div id="t-body">
+    </div>
+  </article>
+  </main>
+
+  <script src="/js/headerLoader.js" defer></script>
+
+  <script>
+  const LABOR_CONTENT = {
+    en: {
+      title: "LABOR BASIC",
+      html: `
+        <p><strong>Residential buildings are the backbone of Empire Run.</strong><br>
+        They are the only source of <strong>labor</strong> and <strong>money</strong>. Without stable housing, factories will eventually stop.</p>
+
+        <p><strong>Houses cannot function on their own.</strong><br>
+        Each residential building must be <strong>served by a Market</strong>. Losing market service immediately halts the building.</p>
+
+        <p><strong>Each house requires resources to grow and sustain population.</strong><br>
+        Every cycle, the house consumes <strong>one unit of each required resource</strong> to maintain maximum population.</p>
+
+        <p><strong>Example:</strong><br>
+        Farmer Houses require <strong>Fish</strong> and support up to <strong>5 Fish population</strong>.<br>
+        To maintain this, supply <strong>1 Fish per house every 10 seconds</strong>.</p>
+
+        <p><strong>If resources are insufficient, population scales down.</strong><br>
+        Supplying only <strong>60%</strong> of Fish means the house sustains only <strong>60%</strong> of its max population.</p>
+
+        <p><strong>To check stability, use the Statistics Panel.</strong><br>
+        Ensure <strong>Actual Production ≥ Expected Consumption</strong>.</p>
+
+        <p><strong>Money is generated based on actual population.</strong><br>
+        Income depends on population type, current population, and satisfaction with public services.</p>
+
+        <p><strong>Once conditions are met, houses can be upgraded</strong><br>
+        to unlock the next population tier and new mechanics.</p>
+
+        <p><strong>Warning:</strong><br>
+        Upgrading too aggressively may drain labor from factories and break production chains.</p>
+      `
+    },
+    vi: {
+      title: "NHÂN LỰC CƠ BẢN",
+      html: `
+        <p><strong>Nhà dân là nền tảng quan trọng nhất trong Empire Run.</strong><br>
+        Đây là nơi duy nhất sinh ra <strong>nhân lực</strong> và <strong>tiền</strong>. Nếu nhà dân không ổn định, nhà máy sẽ dần dừng hoạt động.</p>
+
+        <p><strong>Nhà dân không thể hoạt động độc lập.</strong><br>
+        Mỗi nhà dân bắt buộc phải được <strong>phục vụ bởi Chợ (Market)</strong>. Mất kết nối chợ là ngừng hoạt động ngay.</p>
+
+        <p><strong>Mỗi nhà dân yêu cầu tài nguyên để sinh và duy trì dân số.</strong><br>
+        Với mỗi chu kỳ, nhà dân sẽ yêu cầu <strong>1 đơn vị tài nguyên của mỗi loại</strong> để giữ dân số ở mức tối đa.</p>
+
+        <p><strong>Ví dụ:</strong><br>
+        Nhà nông dân cần <strong>Fish</strong> và có thể sinh tối đa <strong>5 dân Fish</strong>.<br>
+        Để giữ mức này, bạn phải cung cấp <strong>1 Fish cho mỗi nhà nông dân mỗi 10 giây</strong>.</p>
+
+        <p><strong>Nếu bạn không cấp đủ tài nguyên?</strong><br>
+        Dân số sẽ <strong>giảm theo tỷ lệ tài nguyên được cấp</strong>.<br>
+        Ví dụ: nếu bạn chỉ cung cấp được <strong>60%</strong> Fish, nhà dân chỉ duy trì được <strong>60%</strong> dân số tối đa.</p>
+
+        <p><strong>Làm sao biết bạn có sản xuất đủ tài nguyên?</strong><br>
+        Hãy kiểm tra <strong>Bảng Thống Kê</strong> và đảm bảo:<br>
+        <strong>Actual Production ≥ Expected Consumption</strong>.</p>
+
+        <p><strong>Nhà dân sinh tiền dựa trên số dân thực tế.</strong><br>
+        Thu nhập phụ thuộc vào loại dân, số dân hiện có và mức độ hài lòng với <strong>dịch vụ công cộng</strong>.</p>
+
+        <p><strong>Khi đã thỏa mãn điều kiện, bạn có thể nâng cấp nhà dân</strong><br>
+        để mở sang <strong>giai đoạn dân cư tiếp theo</strong> và mở khóa cơ chế mới.</p>
+
+        <p><strong>Lưu ý quan trọng:</strong><br>
+        Nâng cấp quá nhiều nhà dân cùng lúc có thể khiến bạn <strong>thiếu nhân lực cho nhà máy</strong> và làm sụp đổ chuỗi sản xuất.</p>
+      `
+    }
+  };
+
+  function renderLabor(lang) {
+    const t = LABOR_CONTENT[lang] || LABOR_CONTENT.en;
+    const titleEl = document.getElementById("t-title");
+    const bodyEl = document.getElementById("t-body");
+    if (titleEl) titleEl.textContent = t.title;
+    if (bodyEl) bodyEl.innerHTML = t.html;
+  }
+
+  // Lần đầu khi DOM sẵn sàng
+  document.addEventListener("DOMContentLoaded", () => {
+    const lang = window.getCurrentLang ? window.getCurrentLang() : "en";
+    renderLabor(lang);
+  });
+
+  // Khi đổi ngôn ngữ từ header
+  window.addEventListener("languageChange", (e) => {
+    const lang = (e.detail && e.detail.lang) || "en";
+    renderLabor(lang);
+  });
+</script>
+
+</body>
+</html>

@@ -5,6 +5,7 @@
   <title>Leaderboard</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <link rel="icon" type="image/png" href="/img/WebLogo.png" />
+  <link rel="stylesheet" href="/css/global.css">
   <style>
     :root{
       /* Palette giấy vàng + đỏ nâu */
@@ -78,15 +79,7 @@
       flex:1;
       overflow-y:auto;
       padding-right:8px;
-
-      /* Ẩn scrollbar */
-      scrollbar-width: none;
-      -ms-overflow-style: none; 
     }
-    .list::-webkit-scrollbar{
-    display:none;
-    }
-
     .row{
       display:flex;
       align-items:center;
@@ -170,7 +163,7 @@
       <!-- Cột giữa: LEADERBOARD -->
       <section class="wrap">
         <h1>LEADERBOARD</h1>
-        <div id="list" class="list"></div>
+        <div id="list" class="list no-scrollbar"></div>
         <div id="empty" class="empty" style="display:none;">Comrade, carve your name into history!</div>
       </section>
       <!-- Cột phải: bỏ trống -->

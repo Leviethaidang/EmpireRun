@@ -14,14 +14,15 @@
     z-index: 1000;
   }
 
-  .topbar-inner {
-    max-width: 900px;
+  .topbar-inner{
+    max-width: 1200px;
     margin: 0 auto;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    gap: 16px;
+    display:flex;
+    align-items:center;
+    justify-content:flex-end;
+    gap: 10px;
   }
+
 
   /* Ô vuông chứa logo ở góc trái */
   .topbar-logo {
@@ -107,6 +108,10 @@
     background: #b22222;
     color: #ffffff;
   }
+  .topbar-link.active{
+    background: rgba(255,255,255,0.22);
+    border-color: rgba(255,255,255,0.95);
+  }
 </style>
 
 <div class="topbar">
@@ -120,6 +125,11 @@
   <!-- PHẦN NỘI DUNG CHÍNH (MENU + LANGUAGE) -->
   <div class="topbar-inner">
     <nav class="topbar-nav">
+      <a href="/guide" class="topbar-link topbar-back" id="back-to-guide" style="display:none;">
+        ← Back to Guide
+      </a>
+
+      <a href="/guide" class="topbar-link" id="nav-guide" data-page="guide">Guide</a>
       <a href="/leaderboard" class="topbar-link" data-page="leaderboard">Leaderboard</a>
     </nav>
 
