@@ -1,5 +1,7 @@
 //server.js tại web chính 
-require("dotenv").config();
+if (!process.env.RENDER) {
+  require("dotenv").config();
+}
 
 // ====== IMPORT ======
 const express = require("express");
