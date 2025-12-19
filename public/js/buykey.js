@@ -10,7 +10,7 @@ const BUYKEY_I18N = {
     amountLabel: "Amount",
     bankInfoLabel: "Bank Info:",
     bankNameLabel: "Bank",
-    bankAccLabel: "Account No.",
+    bankAccLabel: "Account No",
     bankOwnerLabel: "Account name",
     warnLine1: "Please transfer exactly",
     warnLine1b: "and use this content",
