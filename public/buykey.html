@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <title>Buy License Key - Empire Run</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="icon" type="image/png" href="/img/WebLogo.png" />
+  <link rel="stylesheet" href="/css/global.css">
+
+  <style>
+    body{
+      background: url("/img/BlankBG.png") center center / cover no-repeat fixed;
+      background-color:#0b1018;
+    }
+  </style>
+
+</head>
+
+<body>
+  <div id="site-header"></div>
+
+  <main class="page">
+    <div class="card">
+      <h1 data-i18n="title">Buy License Key</h1>
+
+      <div class="row">
+        <div class="col">
+          <label data-i18n="emailLabel">Email</label>
+          <input id="email" placeholder="example@gmail.com" data-i18n-placeholder="emailPlaceholder" />
+          <button id="btn-order" class="btn" data-i18n="orderBtn">Order</button>
+          <div id="msg" style="margin-top:10px;"></div>
+        </div>
+
+        <div class="col">
+          <div id="qrBox" class="qrBox hidden">
+            <img class="qr" src="/img/QR.jpg" alt="QR Payment">
+          </div>
+        </div>
+      </div>
+
+      <div id="paybox" class="paybox hidden">
+      <div class="kv"><span data-i18n="orderCodeLabel">Order Code</span>: <span class="code" id="orderCode">-</span></div>
+      <div class="kv"><span data-i18n="amountLabel">Amount</span>: <span>50.000 VND</span></div>
+      <div class="kv" data-i18n="bankInfoLabel">Bank Info:</div>
+
+        <div>
+          <div>- <span data-i18n="bankNameLabel">Ngân hàng</span>: <b>VietcomBank</b></div>
+          <div>- <span data-i18n="bankAccLabel">STK</span>: <b>1027396397</b></div>
+          <div>- <span data-i18n="bankOwnerLabel">Chủ TK</span>: <b>LE VIET HAI DANG</b></div>
+        </div>
+
+      <div class="warn">
+        <span data-i18n="warnLine1">Vui lòng chuyển khoản đúng</span> <b>50.000 VND</b>
+        <span data-i18n="warnLine1b">và ghi đúng nội dung</span> <b class="code" id="orderCode2"></b><br/>
+        <span data-i18n="warnLine2">Không xử lý chuyển khoản thiếu / sai nội dung.</span><br/>
+        <span data-i18n="warnLine3">Key sẽ được gửi về email trong</span> <b data-i18n="warnTime">2 phút – 3 giờ</b>.
+      </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="/js/headerLoader.js" defer></script>
+  <script src="/js/buykey.js"></script>
+ 
+</body>
+</html>
