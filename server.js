@@ -180,7 +180,7 @@ app.get("/guide/:slug", (req, res) => {
 
 //nút tải game
 app.get("/download", (req, res) => {
-    const downloadUrl = "https://drive.google.com/uc?export=download&id=1kFn-D542lzSdlmbp5I7SSMrkrTSrJaZC";
+    const downloadUrl = "https://drive.google.com/uc?export=download&id=1BNnYipMnY9GxhM5MgGlCyVoRbg-pia1A";
     res.redirect(downloadUrl);
 });
 
