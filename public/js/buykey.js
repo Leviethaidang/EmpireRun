@@ -13,10 +13,13 @@ const BUYKEY_I18N = {
     bankAccLabel: "Account No",
     bankOwnerLabel: "Account name",
     warnLine1: "Please transfer exactly",
-    warnLine1b: "and use this content",
+    warnLine1b: "and use this content:",
     warnLine2: "Transfers with wrong amount/content will NOT be processed.",
-    warnLine3: "Your key will be sent to your email within",
-    warnTime: "2 minutes – 3 hours",
+    warnLine3: "After your payment is successfully confirmed, your license key will be sent to your email ",
+    warnTime: " within 3 hours",
+    warnLine4: " If you do not receive it after 3 hours, please contact customer support",
+
+
 
     // messages
     msgMissingEmail: "Please enter your email.",
@@ -37,10 +40,13 @@ const BUYKEY_I18N = {
     bankAccLabel: "STK",
     bankOwnerLabel: "Chủ TK",
     warnLine1: "Vui lòng chuyển khoản đúng",
-    warnLine1b: "và ghi đúng nội dung",
+    warnLine1b: "và ghi đúng nội dung:",
     warnLine2: "Không xử lý chuyển khoản thiếu / sai nội dung.",
-    warnLine3: "Key sẽ được gửi về email trong",
-    warnTime: "2 phút – 3 giờ",
+    warnLine3: "Sau khi giao dịch được xác nhận thành công, key của bạn sẽ được gửi về email trong vòng",
+    warnTime: " tối đa 3 giờ",
+    warnLine4: " Nếu sau 3 giờ vẫn chưa nhận được, vui lòng liên hệ chăm sóc khách hàng.",
+
+
 
     // messages
     msgMissingEmail: "Vui lòng nhập email.",
