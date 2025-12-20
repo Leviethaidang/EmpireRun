@@ -108,6 +108,76 @@ const orderCodeEl = document.getElementById("orderCode");
 const orderCode2El = document.getElementById("orderCode2");
 const qrBox = document.getElementById("qrBox");
 
+// ===== COOLDOWN (client only) =====
+const ORDER_COOLDOWN_MS = 5 * 60 * 1000;
+let cooldownTimer = null;
+
+function normalizeEmailKey(email) {
+  return String(email || "").trim().toLowerCase();
+}
+
+function getCooldownKey(email) {
+  const e = normalizeEmailKey(email);
+  // cooldown theo email
+  return `empireRun_buykey_cooldown_until_${e || "unknown"}`;
+}
+
+function getCooldownUntil(email) {
+  const v = Number(localStorage.getItem(getCooldownKey(email)) || "0");
+  return Number.isFinite(v) ? v : 0;
+}
+
+function setCooldownUntil(email, untilMs) {
+  localStorage.setItem(getCooldownKey(email), String(untilMs));
+}
+
+function clearCooldownTick() {
+  if (cooldownTimer) clearInterval(cooldownTimer);
+  cooldownTimer = null;
+}
+
+function formatMs(ms) {
+  ms = Math.max(0, ms);
+  const totalSec = Math.ceil(ms / 1000);
+  const m = String(Math.floor(totalSec / 60)).padStart(2, "0");
+  const s = String(totalSec % 60).padStart(2, "0");
+  return `${m}:${s}`;
+}
+
+function startCooldownUI(email) {
+  clearCooldownTick();
+
+  function tick() {
+    const until = getCooldownUntil(email);
+    const remain = until - Date.now();
+
+    if (remain > 0) {
+      btn.disabled = true;
+      const t = formatMs(remain);
+
+      // Hiện thông báo đếm ngược
+      setMsg(
+        buykeyLang === "vi"
+          ? `Order thất bại. Vui lòng thử lại sau ${t}.`
+          : `Order failed. Please try again after ${t}.`,
+        true,
+        false
+      );
+    } else {
+      btn.disabled = false;
+      clearCooldownTick();
+    }
+  }
+
+  tick();
+  cooldownTimer = setInterval(tick, 1000);
+}
+
+function isInCooldown(email) {
+  return Date.now() < getCooldownUntil(email);
+}
+
+
 function setMsg(keyOrText, isError = false, isKey = false) {
   const text = isKey ? (buykeyT[keyOrText] || "") : keyOrText;
 
@@ -131,10 +201,14 @@ btn.addEventListener("click", async () => {
     setMsg("msgMissingEmail", true, true);
     return;
   }
-
+  if (isInCooldown(email)) {
+    startCooldownUI(email);
+    return;
+  }
   btn.disabled = true;
   setMsg("msgCreating", false, true);
   qrBox.classList.add("hidden");
+
   try {
     const res = await fetch("/api/license/order/start", {
       method: "POST",
@@ -153,10 +227,22 @@ btn.addEventListener("click", async () => {
     orderCodeEl.textContent = data.orderCode;
     orderCode2El.textContent = data.orderCode;
 
+    const until = Date.now() + ORDER_COOLDOWN_MS;
+    setCooldownUntil(email, until);
   } catch (err) {
     console.error(err);
     setMsg("msgFail", true, true);
   } finally {
+    btn.disabled = false;
+  }
+});
+
+
+emailEl.addEventListener("input", () => {
+  const email = (emailEl.value || "").trim();
+  if (!email) return;
+  if (isInCooldown(email)) startCooldownUI(email);
+  else {
     btn.disabled = false;
   }
 });
